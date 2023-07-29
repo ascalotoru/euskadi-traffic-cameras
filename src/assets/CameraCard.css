@@ -1,0 +1,27 @@
+.cameraCard {
+  list-style: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  border-color: #f9f9f9;
+  color: #f9f9f9;
+}
+
+.cameraCard:hover {
+  cursor: pointer;
+  background-color: #e2581f;
+}
+
+.cameraCard.selected {
+  cursor: pointer;
+  background-color: #e2581f;
+}
+
+.cameraImage {
+  border-radius: 5px;
+}
+
+.cameraAddress {
+  font-size: 0.8em;
+}
