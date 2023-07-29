@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import { CamarasGrid } from './components/CamerasGrid';
+import { Menu } from './components/Menu';
+import './assets/App.css';
+import { Camera } from './components/CameraCard';
+import { getAllCameras } from './utils/httpClient';
 
-function App() {
+const FAVORITOS_KEY = "favoritos";
+
+export const App = () => {
+  const [selectedMenu, setSelectedMenu] = useState('Bizkaia');
+  const [favoritos, setFavoritos] = useState<string[]>( () => {
+    const storedFavoritos = localStorage.getItem(FAVORITOS_KEY);
+    return storedFavoritos ? JSON.parse(storedFavoritos) : [];
+  });
+  const [allCameras, setAllCameras] = useState<Camera[]>([]);
+
+  useEffect(() => {
+    const sourceId = selectedMenu === 'Bilbao' ? '5' : '2';
+    getAllCameras(sourceId)
+      .then((data) => {
+        setAllCameras(data);
+      })
+      .catch((error) => {
+        console.log("Error obtaining cameras", error);
+      })
+  }, [selectedMenu])
+  
+  // useEffect(() => {
+  //   localStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritos));
+  // }, [favoritos]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header className='header'>
+        <h1 className='title'>Cámaras Tráfico</h1>
       </header>
-    </div>
-  );
+      <main>
+        <Menu selectedMenu={selectedMenu} onSelectMenu={setSelectedMenu} />
+        { selectedMenu === "Favoritos" ? (
+          <CamarasGrid selectedMenu={selectedMenu} favoritos={favoritos} cameras={allCameras} />
+        ) : (
+          <CamarasGrid selectedMenu={selectedMenu} favoritos={favoritos} cameras={allCameras} />
+        )}
+      </main>
+    </>
+  )
 }
-
-export default App;
