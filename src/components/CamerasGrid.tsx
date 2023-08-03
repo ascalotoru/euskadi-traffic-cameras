@@ -5,23 +5,32 @@ import { Empty } from './Empty';
 
 type CamarasGridProps = {
   selectedMenu: string;
-  favoritos: string[];
   cameras: Camera[];
 }
 
-export const CamarasGrid: React.FC<CamarasGridProps> = ({ selectedMenu, favoritos, cameras }) => {
+export const CamarasGrid: React.FC<CamarasGridProps> = ({ selectedMenu, cameras }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [camerasToShow, setCamarasToShow] = useState<Camera[]>([]);
 
-  useEffect( () => {
-    if (selectedMenu === "Favoritos") {
-      const favoriteCameras = cameras.filter((camera) => favoritos.includes(camera.cameraId));
-      setCamarasToShow(favoriteCameras);
-    } else {
-      setCamarasToShow(cameras);
-    }
-    setIsLoading(false);
-  }, [favoritos, cameras]);  
+  const [favorites, setFavorites] = useState<Camera[]>(() => {
+    const storedValue = localStorage.getItem("favorites");
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites])
+  
+
+  // useEffect( () => {
+  //   if (selectedMenu === "Favoritos") {
+  //     const favoriteCameras = cameras.filter((camera) => favoritos.includes(camera.cameraId));
+  //     setCamarasToShow(favoriteCameras);
+  //   } else {
+  //     setCamarasToShow(cameras);
+  //   }
+  //   setIsLoading(false);
+  // }, [cameras]);  
 
   if (isLoading && camerasToShow.length === 0) {
     return <Empty />
@@ -30,7 +39,7 @@ export const CamarasGrid: React.FC<CamarasGridProps> = ({ selectedMenu, favorito
   return (
     <ul className="camerasGrid">
       {camerasToShow.map( (camera) => (
-        <CameraCard key={camera.cameraId} camera={camera} />
+        <CameraCard key={camera.cameraId} camera={camera} favorites={favorites} setFavorites={setFavorites}/>
       ))}
     </ul>
   )

@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from 'react'
+  import React from 'react'
   import "../assets/CameraCard.css";
 
   export interface Camera {
@@ -14,32 +14,21 @@
   }
 
   interface CameraCardProps {
-    camera: Camera
+    camera: Camera,
+    favorites: Camera[],
+    setFavorites: React.Dispatch<React.SetStateAction<Camera[]>>
   }
 
-  export const CameraCard: React.FC<CameraCardProps> = ({ camera }) => {
-    const [favorites, setFavorites] = useState<Camera[]>(() => {
-      const storedValue = localStorage.getItem("favorites");
-      return storedValue ? JSON.parse(storedValue) : [];
-    })
-
+  export const CameraCard: React.FC<CameraCardProps> = (props) => {
+    const { camera, favorites, setFavorites } = props;
+    
     const isFavorite = favorites.some((fav) => fav.cameraId === camera.cameraId);
     
-    useEffect(() => {
-      localStorage.setItem("favorites",JSON.stringify(favorites));
-    }, [favorites]);
-
     const handleClick = () => {
       if (isFavorite) {
-        // Si la cámara actual ya es una favorita, la deseleccionamos
-        // Filtramos el array de favoritos para eliminar la cámara actual de la lista
-        setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.cameraId !== camera.cameraId));
+        setFavorites(favorites.filter((fav) => fav.cameraId !== camera.cameraId));
       } else {
-        // Si la cámara actual no es una favorita, la seleccionamos
-        // Añadimos la cámara actual al array de favoritos
-        if (!favorites.some((fav) => fav.cameraId === camera.cameraId)) {
-          setFavorites((prevFavorites) => [...prevFavorites, camera]);
-        }
+        setFavorites([...favorites, camera]);
       }
     }
 

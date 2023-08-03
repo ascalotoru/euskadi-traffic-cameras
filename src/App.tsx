@@ -38,9 +38,9 @@ export const App = () => {
       <main>
         <Menu selectedMenu={selectedMenu} onSelectMenu={setSelectedMenu} />
         { selectedMenu === "Favoritos" ? (
-          <CamarasGrid selectedMenu={selectedMenu} favoritos={favoritos} cameras={allCameras} />
+          <CamarasGrid selectedMenu={selectedMenu} cameras={allCameras} />
         ) : (
-          <CamarasGrid selectedMenu={selectedMenu} favoritos={favoritos} cameras={allCameras} />
+          <CamarasGrid selectedMenu={selectedMenu} cameras={allCameras} />
         )}
       </main>
     </>
