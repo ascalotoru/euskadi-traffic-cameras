@@ -16,11 +16,13 @@
   interface CameraCardProps {
     camera: Camera,
     favorites: Camera[],
-    setFavorites: React.Dispatch<React.SetStateAction<Camera[]>>
+    setFavorites: React.Dispatch<React.SetStateAction<Camera[]>>,
+    favoriteMenu: boolean,
   }
 
   export const CameraCard: React.FC<CameraCardProps> = (props) => {
-    const { camera, favorites, setFavorites } = props;
+    const { camera, favorites, setFavorites, favoriteMenu } = props;
+    let cardClassName = "cameraCard";
     
     const isFavorite = favorites.some((fav) => fav.cameraId === camera.cameraId);
     
@@ -32,7 +34,9 @@
       }
     }
 
-    const cardClassName = `cameraCard ${isFavorite ? "selected" : "" }`;
+    if (!favoriteMenu) {
+      cardClassName = `cameraCard ${isFavorite ? "selected" : "" }`;
+    }
 
     return (
       <li onClick={handleClick} className={cardClassName}>

@@ -5,14 +5,8 @@ import './assets/App.css';
 import { Camera } from './components/CameraCard';
 import { getAllCameras } from './utils/httpClient';
 
-const FAVORITOS_KEY = "favoritos";
-
 export const App = () => {
   const [selectedMenu, setSelectedMenu] = useState('Bizkaia');
-  const [favoritos, setFavoritos] = useState<string[]>( () => {
-    const storedFavoritos = localStorage.getItem(FAVORITOS_KEY);
-    return storedFavoritos ? JSON.parse(storedFavoritos) : [];
-  });
   const [allCameras, setAllCameras] = useState<Camera[]>([]);
 
   useEffect(() => {
@@ -26,10 +20,6 @@ export const App = () => {
       })
   }, [selectedMenu])
   
-  // useEffect(() => {
-  //   localStorage.setItem(FAVORITOS_KEY, JSON.stringify(favoritos));
-  // }, [favoritos]);
-
   return (
     <>
       <header className='header'>
