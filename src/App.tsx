@@ -4,6 +4,7 @@ import { Menu } from './components/Menu';
 import './assets/App.css';
 import { Camera } from './components/CameraCard';
 import { getAllCameras } from './utils/httpClient';
+import { Footer } from './components/Footer';
 
 export const App = () => {
   const [selectedMenu, setSelectedMenu] = useState('Bizkaia');
@@ -33,6 +34,7 @@ export const App = () => {
           <CamarasGrid selectedMenu={selectedMenu} cameras={allCameras} />
         )}
       </main>
+      <Footer />
     </>
   )
 }
