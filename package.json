@@ -58,7 +58,7 @@
     "serialize-javascript": "7.0.5",
     "follow-redirects": "1.16.0",
     "http-proxy-middleware": "2.0.10",
-    "webpack-dev-server": "5.2.6",
+    "webpack-dev-server": "4.15.2",
     "brace-expansion": "2.1.4",
     "@babel/core": "7.29.6",
     "@babel/plugin-transform-modules-systemjs": "7.29.4",
