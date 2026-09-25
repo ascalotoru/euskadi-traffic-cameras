@@ -15,7 +15,7 @@
 - `src/App.tsx` owns menu selection and loads cameras through `src/utils/httpClient.ts`. Bilbao uses source `5`; other menu selections use source `2`.
 - `src/components/Menu.tsx` presents menu choices. `src/components/CamerasGrid.tsx` owns favorites state and decides whether to show loaded cameras or favorites. `src/components/CameraCard.tsx` renders cards and toggles favorites.
 - Keep API access in `src/utils/httpClient.ts`; keep presentation and styles in `src/components/` and `src/assets/`.
-- `build/` and `node_modules/` are generated or installed artifacts. `dist/` is the production build output; do not edit it or `node_modules/`.
+- `node_modules/` are generated or installed artifacts. `dist/` is the production build output; do not edit it or `node_modules/`.
 
 ## Data and API
 
@@ -32,7 +32,7 @@
 
 ## Dependencies
 
-- `package.json` may pin vulnerable transitive dependencies via npm `overrides`: pin only what `npm audit` flags, then verify with `npm run build` and `npm test` (CRA and its `react-scripts` tree are gone).
+- Dependency overrides were previously used to pin vulnerable transitive dependencies of CRA (removed). If `npm audit` flags something again, pin it via npm `overrides` in `package.json`, then verify with `npm run build` and `npm test`.
 
 ## Commits
 

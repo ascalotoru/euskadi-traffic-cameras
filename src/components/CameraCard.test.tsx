@@ -1,8 +1,12 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { afterEach, describe, it, expect, vi } from 'vitest'
+import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
 import { CameraCard, Camera } from './CameraCard'
 import type { SetStateAction } from 'react'
+
+afterEach(() => {
+  cleanup()
+})
 
 const camera: Camera = {
   address: 'Bilbao',
@@ -31,20 +35,24 @@ describe('CameraCard', () => {
   })
 
   it('toggles favorite on click', () => {
-    const setFavorites = (updater: (prev: Camera[]) => Camera[]) => {
-      const next = updater([])
-      expect(next).toHaveLength(1)
-      expect(next[0].cameraId).toBe('1')
-    }
-    const toggleFavorites = setFavorites as unknown as (value: SetStateAction<Camera[]>) => void
+    expect.assertions(4)
+    const capturedUpdaters: ((prev: Camera[]) => Camera[])[] = []
+    const setFavorites = vi.fn((updater: SetStateAction<Camera[]>) => {
+      capturedUpdaters.push(updater as (prev: Camera[]) => Camera[])
+    })
     render(
       <CameraCard
         camera={camera}
         favorites={[]}
-        setFavorites={toggleFavorites}
+        setFavorites={setFavorites}
         favoriteMenu={false}
       />
     )
     fireEvent.click(screen.getByRole('listitem'))
+    expect(setFavorites).toHaveBeenCalledTimes(1)
+    expect(capturedUpdaters).toHaveLength(1)
+    const next = capturedUpdaters[0]([])
+    expect(next).toHaveLength(1)
+    expect(next[0].cameraId).toBe('1')
   })
 })
