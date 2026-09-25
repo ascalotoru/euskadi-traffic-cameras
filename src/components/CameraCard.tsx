@@ -28,9 +28,9 @@
     
     const handleClick = () => {
       if (isFavorite) {
-        setFavorites(favorites.filter((fav) => fav.cameraId !== camera.cameraId));
+        setFavorites((prev) => prev.filter((fav) => fav.cameraId !== camera.cameraId));
       } else {
-        setFavorites([...favorites, camera]);
+        setFavorites((prev) => [...prev, camera]);
       }
     }
 
