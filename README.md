@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Euskadi Traffic Cameras
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Featured web app built with [Create React App](https://github.com/facebook/create-react-app) that shows live traffic cameras from the Basque Country (Euskadi).
+
+- Browse cameras by location (Bilbao and other areas) via the menu.
+- Mark cameras as favorites; favorites are stored in the browser `localStorage`.
+- Data source: [Euskadi.eus Traffic API](https://api.euskadi.eus/traffic/v1.0/cameras/bySource/{source}?_page={page}).
+
+## Getting Started
+
+Requires Node `v22.12.0` (see `.nvmrc`).
+
+1. `npm install`
+2. `npm start`
 
 ## Available Scripts
 
