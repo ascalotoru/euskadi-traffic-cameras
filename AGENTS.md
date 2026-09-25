@@ -28,6 +28,11 @@
 ## Workflow
 
 - Group changes by functionality; avoid mixing unrelated changes.
+- Whenever a piece of functionality changes, review `AGENTS.md` and `README.md` and update them if they no longer describe the code accurately.
+
+## Dependencies
+
+- `package.json` pins vulnerable transitive dependencies via npm `overrides` (CRA's `react-scripts` is unmaintained). Bump override versions when Dependabot or `npm audit` flag them, then verify with `npm run build` because overriding may break tooling (e.g. `svgo`).
 
 ## Commits
 
