@@ -2,7 +2,7 @@
 
 ## Commands
 
-- Use Node `v22.12.0` from `.nvmrc`.
+- Use Node `v24.21.0` from `.nvmrc`.
 - Start development server with `npm start`.
 - Run the CRA test runner with `npm test`.
 - Create production build with `npm run build`.

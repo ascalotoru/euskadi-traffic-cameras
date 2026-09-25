@@ -8,7 +8,7 @@ Featured web app built with [Create React App](https://github.com/facebook/creat
 
 ## Getting Started
 
-Requires Node `v22.12.0` (see `.nvmrc`).
+Requires Node `v24.21.0` (see `.nvmrc`).
 
 1. `npm install`
 2. `npm start`
