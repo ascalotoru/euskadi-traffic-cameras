@@ -4,18 +4,18 @@
 
 - Use Node `v24.21.0` from `.nvmrc`.
 - Start development server with `npm start`.
-- Run the CRA test runner with `npm test`.
+- Run the Vitest test runner with `npm test`.
 - Create production build with `npm run build`.
 - `package.json` defines no separate lint or typecheck scripts.
 
 ## Architecture
 
-- This is one private Create React App package using React 18, TypeScript 4.9, and `react-scripts` 5.
+- This is one private Vite package using React 18, TypeScript 5.9, and Vitest for tests.
 - `src/index.tsx` is browser entrypoint. It renders `App` in `React.StrictMode`.
 - `src/App.tsx` owns menu selection and loads cameras through `src/utils/httpClient.ts`. Bilbao uses source `5`; other menu selections use source `2`.
 - `src/components/Menu.tsx` presents menu choices. `src/components/CamerasGrid.tsx` owns favorites state and decides whether to show loaded cameras or favorites. `src/components/CameraCard.tsx` renders cards and toggles favorites.
 - Keep API access in `src/utils/httpClient.ts`; keep presentation and styles in `src/components/` and `src/assets/`.
-- `build/` and `node_modules/` are generated or installed artifacts. Do not edit them.
+- `node_modules/` are generated or installed artifacts. `dist/` is the production build output; do not edit it or `node_modules/`.
 
 ## Data and API
 
@@ -32,7 +32,7 @@
 
 ## Dependencies
 
-- `package.json` pins vulnerable transitive dependencies via npm `overrides` (CRA's `react-scripts` is unmaintained). Bump override versions when Dependabot or `npm audit` flag them, then verify with `npm run build` because overriding may break tooling (e.g. `svgo`).
+- Dependency overrides were previously used to pin vulnerable transitive dependencies of CRA (removed). If `npm audit` flags something again, pin it via npm `overrides` in `package.json`, then verify with `npm run build` and `npm test`.
 
 ## Commits
 
@@ -40,5 +40,5 @@
 
 ## Verification
 
-- Run `npm test` for tests and `npm run build` for production compilation.
+- Run `npm test` for tests and `npm run build` for production compilation (output in `dist/`).
 - Before finishing, run `git diff --check`. Once `AGENTS.md` is tracked, inspect it with `git diff -- AGENTS.md`; while it is untracked, inspect it with `git diff --no-index /dev/null AGENTS.md` or an equivalent command.

@@ -2,77 +2,27 @@
   "name": "camaras-trafico-euskadi",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.38",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "test": "vitest run",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  },
-  "overrides": {
-    "node-forge": "1.4.0",
-    "ws": "8.21.0",
-    "shell-quote": "1.9.0",
-    "path-to-regexp": "0.1.13",
-    "picomatch": "2.3.2",
-    "lodash": "4.18.1",
-    "js-yaml": "4.3.2",
-    "yaml": "2.8.3",
-    "postcss": "8.5.23",
-    "uuid": "11.1.1",
-    "form-data": "3.0.5",
-    "serialize-javascript": "7.0.5",
-    "follow-redirects": "1.16.0",
-    "http-proxy-middleware": "2.0.10",
-    "webpack-dev-server": "4.15.2",
-    "brace-expansion": "2.1.4",
-    "@babel/core": "7.29.6",
-    "@babel/plugin-transform-modules-systemjs": "7.29.4",
-    "@tootallnate/once": "2.0.1",
-    "launch-editor": "2.14.1",
-    "nth-check": "2.1.1",
-    "underscore": "1.13.8",
-    "browserslist": "4.28.7",
-    "fast-uri": "3.1.6",
-    "nanoid": "3.3.18",
-    "colord": "2.9.4",
-    "qs": "6.16.0",
-    "body-parser": "1.20.6",
-    "baseline-browser-mapping": "2.11.0",
-    "svgo": "2.8.4"
+ "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "jsdom": "^30.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
   }
 }
